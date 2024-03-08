@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+
 @Controller
 public class MainController {
 
 
 	@Autowired
-	MemberDao memberDao;
+	MemberService memberService;
 
 	@RequestMapping(value = "/newMember")
 	public String newMember() {
@@ -25,8 +27,8 @@ public class MainController {
 		System.out.println("gender : " + memberVo.getsGender());
 		System.out.println("major : " + memberVo.getsMajor());
 
-		memberDao.insert(memberVo);
-		return "SuccessLog";
+		memberService.signUpConfirm(memberVo);
+		return "SIGN_UP_OK";
 	}
 
 	@RequestMapping(value = "/LoginSys")
@@ -35,9 +37,22 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "SuccessLog")
-	public String loginSys() {
+	public String loginSys(MemberVo memberVo) {
 
+		MemberVo signInedMember = memberService.signInCofrim(memberVo);
+		
+		if (signInedMember != null) {
+			return "SuccessLog";
+		}
+		else {
+			return "sign_In_ng";
+		}
 
-		return "SuccessLog";
+		
+	}
+	@RequestMapping(value = "/MainHome")
+	public String MainHome() {
+		
+		return "MainHome";
 	}
 }

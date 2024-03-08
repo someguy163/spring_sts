@@ -18,7 +18,7 @@
 	private char sGender;
 	private String sMajor; -->
 	
-	<form action="/configuration/makeNewMember">
+	<form action="/member/makeNewMember">
 	ID : <input type="text" name="sId"/> <br />
 	PW : <input type="password" name="sPw"/> <br />
 	NAME : <input type="text" name="sName" /> <br />

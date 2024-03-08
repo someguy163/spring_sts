@@ -1,11 +1,14 @@
 package MIT.ems.member;
 
 import java.util.HashMap;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
+
+
 @Component
 public class MemberDao {
 
@@ -39,6 +42,18 @@ public class MemberDao {
 			System.out.println("MAJOR : " + member.getsMajor());
 			
 		}
+	}
+	
+	public MemberVo selectMember(MemberVo memberVo) {
+		
+		MemberVo signedMember = memberDB.get(memberVo.getsId());
+		if (signedMember != null && memberVo.getsPw().equals(signedMember.getsPw())) {
+			return signedMember;
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 

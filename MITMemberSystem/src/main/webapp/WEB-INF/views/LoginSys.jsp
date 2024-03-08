@@ -9,7 +9,7 @@
 <body>
 
 <h1>로그인 페이지입니다</h1>
-<form action="/configuration/SuccessLog">
+<form action="/member/SuccessLog">
 ID : <input type="text" name="sId" />
 PW : <input type="password" name="sPw"/>
 <input type="submit" value="로그인" />
