@@ -2,6 +2,7 @@ package com.office.library.admin.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ public class AdminMemberController {
 
 	@Autowired
 	AdminMemberService adminMemberService;
+
 
 	@GetMapping("/createAccountForm")
 	public String createAccountForm() {
@@ -38,5 +40,30 @@ public class AdminMemberController {
 
 
 	}
+//	로그인창
+	@GetMapping(value = "/loginForm")
+	public String loginForm() {
+		
+		
+		return "admin/member/login_form";
+	}
+	
+	
+	@PostMapping(value = "/loginConfirm")
+	public String loginConfirm(AdminMemberVo adminMemberVo) {
+		String nextpage = "admin/member/login_ok";
+		AdminMemberVo loginAdminMemberVo = adminMemberService.loginConfirm(adminMemberVo);
+		
+		if (loginAdminMemberVo == null) {
+			return "admin/member/login_ng";		
+		}
+//		else {
+//			
+//		}
+		return nextpage;
+	
+	}
+	
+
 
 }

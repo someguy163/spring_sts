@@ -34,6 +34,8 @@
 		<%
 		} else {
 		%>
+		
+		<!-- 로그인전 -->
 		<div class="menu">
 			<ul>
 				<li><a href="<c:url value='/admin/member/loginForm' />">로그인</a></li>
