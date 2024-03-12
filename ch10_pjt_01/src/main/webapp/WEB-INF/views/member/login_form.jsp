@@ -10,7 +10,7 @@
 
 <h3>MEMBER LOGIN FORM</h3>
 
-<form action="/member/loginConfirm" method="post">
+<form action="/cookie/member/loginConfirm" method="post">
 
 id : <input type="text" name="m_id"/> <br />
 pw : <input type="text" name="m_pw"/> <br />

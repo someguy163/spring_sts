@@ -1,12 +1,19 @@
 package com.office.library.admin.member;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/admin/member")
@@ -50,18 +57,77 @@ public class AdminMemberController {
 	
 	
 	@PostMapping(value = "/loginConfirm")
-	public String loginConfirm(AdminMemberVo adminMemberVo) {
+	public String loginConfirm(AdminMemberVo adminMemberVo , HttpSession session) {
 		String nextpage = "admin/member/login_ok";
-		AdminMemberVo loginAdminMemberVo = adminMemberService.loginConfirm(adminMemberVo);
+		AdminMemberVo loginedAdminMemberVo = adminMemberService.loginConfirm(adminMemberVo);
 		
-		if (loginAdminMemberVo == null) {
+		if (loginedAdminMemberVo == null) {
 			return "admin/member/login_ng";		
 		}
-//		else {
-//			
-//		}
+//		세선
+		else { 
+			session.setAttribute("loginedAdminMemberVo", loginedAdminMemberVo);
+			session.setMaxInactiveInterval(60 * 30);
+			System.out.println("세션확인하기");
+		}
 		return nextpage;
 	
+	}
+	
+	@GetMapping(value = "/logoutConfirm")
+	public String logoutConfirm(HttpSession session) {
+		
+		System.out.println("[AdminMemberController] logoutConfirm");
+		
+		
+//		2개다 같은방법이다 1번은 특정 세션 지우기
+//		2번은 Array형식일떄 사용하면 된다
+		session.removeAttribute("loginedAdminMemberVo");
+//		session.invalidate();
+		
+		return "redirect:/admin";
+	}
+	
+	
+//	관리자 목록 Model 사용
+//	@GetMapping(value = "/listupAdmin")
+//	public String listupAdmin(Model model) {
+//		System.out.println("[AdminMemberService] listupAdmin");
+//		
+//		String nextPage = "admin/member/listup_admins";
+//		
+//		List<AdminMemberVo> adminMemberVos = adminMemberService.listupAdmin();
+//		
+//		model.addAttribute("adminMemberVos",adminMemberVos);
+//		return nextPage;
+//	}
+	
+//	관리자 목록 ModelAndView 사용
+	@GetMapping(value = "/listupAdmin")
+	public ModelAndView listupAdmin(Model model) {
+		System.out.println("[AdminMemberService] listupAdmin");
+		
+		String nextPage = "admin/member/listup_admins";
+		
+		List<AdminMemberVo> adminMemberVos = adminMemberService.listupAdmin();
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName(nextPage);
+		modelAndView.addObject("adminMemberVos",adminMemberVos);
+		
+		
+		return modelAndView;
+	}
+	
+	@GetMapping(value = "/setAdminApproval")
+	public String setAdminApproaval(@RequestParam("a_m_no") int a_m_no) {
+		System.out.println("[AdminMemberController] setAdminApproval");
+		
+		adminMemberService.setAdminApproaval(a_m_no);
+		
+		return "redirect:/admin/member/listupAdmin";
+		
+		
 	}
 	
 

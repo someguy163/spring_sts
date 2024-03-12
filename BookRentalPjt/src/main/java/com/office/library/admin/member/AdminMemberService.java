@@ -1,5 +1,7 @@
 package com.office.library.admin.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +39,9 @@ public class AdminMemberService {
 		
 		System.out.println("[AdminMemberService] loginConfirm");
 		
-		AdminMemberVo loginedAdminMembervo = adminMemberDao.selectAdmin(adminMemberVo);
+		AdminMemberVo loginedAdminMemberVo = adminMemberDao.selectAdmin(adminMemberVo);
 		
-		if (loginedAdminMembervo !=null) {
+		if (loginedAdminMemberVo !=null) {
 			System.out.println("[AdminMemberService] Admin Member Login Success");
 		}
 		else {
@@ -47,7 +49,19 @@ public class AdminMemberService {
 		}
 		
 		
-		return loginedAdminMembervo;
+		return loginedAdminMemberVo;
+	}
+	
+	
+	public List<AdminMemberVo> listupAdmin() {
+		
+		return adminMemberDao.selectAdmins();
+	}
+	
+	public void setAdminApproaval(int a_m_no) {
+		
+		int result = adminMemberDao.updateAdminAccount(a_m_no);
+		
 	}
 
 }
