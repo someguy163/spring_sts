@@ -3,6 +3,8 @@
 
 
 //	로그인
+
+
 	@PostMapping(value = "/loginConfirm")
 	public String loginConfirm(AdminMemberVo adminMemberVo , HttpSession session) {
 		AdminMemberVo loginedAdminMemberVo = adminMemberService.loginConfirm(adminMemberVo);
@@ -20,6 +22,8 @@
 	}
 	
 //	로그아웃
+
+
 	@GetMapping(value = "/logoutConfirm")
 	public String logoutConfirm(HttpSession session) {
 		session.removeAttribute("loginedAdminMemberVo");
