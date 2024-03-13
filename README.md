@@ -29,3 +29,8 @@ BookRentalPjt (자료) 와 MyBookRentalPjt( 내가한것) 비교하기
 		session.removeAttribute("loginedAdminMemberVo");
 		return "redirect:/admin";
 	}
+
+
+MimeMessangePreparator 인터페이스
+JavaMail MIME 메시지 준비를 위한 콜백 인터페이스이다
+ 
