@@ -9,7 +9,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/admin/modify_book_form.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='resources\css\admin\modify_book_form.css' />" rel="stylesheet" type="text/css">
 
 <jsp:include page="../include/modify_book_form_js.jsp" />
 
