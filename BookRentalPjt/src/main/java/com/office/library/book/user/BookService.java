@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.office.library.book.BookVo;
+import com.office.library.book.HopeBookVo;
 import com.office.library.book.RentalBookVo;
 
-//@Service
-@Service("user.BookService")
+@Service
+//@Service("user.BookService")
 public class BookService {
 
 	@Autowired
@@ -54,5 +55,17 @@ public class BookService {
 		
 	}
 	
+	public int requestHopeBookConfirm(HopeBookVo hopeBookVo) {
+		System.out.println("[BookService] requestHopeBookConfirm()");
+		
+		return bookDao.insertHopeBook(hopeBookVo);
+		
+	}
 	
+	public List<HopeBookVo> listupRequestHopeBook(int u_m_no) {
+		System.out.println("[BookService] listupRequestHopeBook()");
+		
+		return bookDao.selectRequestHopeBooks(u_m_no);
+		
+	}
 }
